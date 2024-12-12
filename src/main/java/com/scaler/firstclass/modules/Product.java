@@ -15,7 +15,7 @@ public class Product {
     private String imageUrl;
     private Category category;
 
-    public Long getId() {
+    public Long getId()  {
         return id;
     }
 
