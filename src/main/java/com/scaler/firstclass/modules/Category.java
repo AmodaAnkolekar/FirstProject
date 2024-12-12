@@ -7,7 +7,7 @@ import lombok.Setter;
 //@Setter
 public class Category {
     private Long id;
-    private String titles;
+    private String title;
 
     public Long getId() {
         return id;
@@ -17,11 +17,19 @@ public class Category {
         this.id = id;
     }
 
-    public String getTitles() {
-        return titles;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitles(String titles) {
-        this.titles = titles;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Category() {
+    }
+
+    public Category(Long id, String title) {
+        this.id = id;
+        this.title = title;
     }
 }

@@ -6,8 +6,6 @@ import lombok.Setter;
 //@Getter
 //@Setter
 public class Product {
-
-
     private Long id;
     private String title;
     private String description;
@@ -15,7 +13,19 @@ public class Product {
     private String imageUrl;
     private Category category;
 
-    public Long getId()  {
+    public Product() {
+    }
+
+    public Product(Long id, String title, String description, Double price, String imageUrl, Category category) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.imageUrl = imageUrl;
+        this.category = category;
+    }
+
+    public Long getId() {
         return id;
     }
 
@@ -61,5 +71,17 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", category=" + category +
+                '}';
     }
 }

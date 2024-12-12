@@ -1,8 +1,8 @@
 package com.scaler.firstclass.controller;
 
 import com.scaler.firstclass.modules.Product;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.scaler.firstclass.service.ProductService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ProductController {
@@ -13,16 +13,30 @@ public class ProductController {
     // 3. update a product
     // 4. delete a product
 
-    // This will help in creating the product
-    //@RequestMapping(value = "/products", method = RequestMethod.POST)
-    @PostMapping("/products")
-    public void createProduct(Product product) {
+    private ProductService productService;
 
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
+
+    // This will help in creating the product
+//    @RequestMapping(value = "/products", method = RequestMethod.POST)
+    @PostMapping("/products")
+    public Product createProduct(@RequestBody Product product) {
+        Product p = productService.createProduct(product.getId(),
+                product.getTitle(), product.getDescription(),
+                product.getPrice(), product.getCategory().getTitle());
+        return p;
     }
 
     // This will help in getting the product
-    public Product getProductById(Long id) {
-        return null;
+    @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable("id") Long id) {
+        System.out.println("Starting the api here");
+        Product p = productService.getSingleProduct(id);
+        System.out.println("Ending the api here");
+
+        return p;
     }
 
     public void updateProduct(Product product) {
