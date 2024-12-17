@@ -10,9 +10,9 @@ public class FirstclassApplication {
     public static void main(String[] args) {
         SpringApplication.run(FirstclassApplication.class, args);
 
-        Product p = new Product();
-        p.setId(12L);
-        System.out.println(p);
+//        Product p = new Product();
+//        p.setId(12L);
+//        System.out.println(p);
 
 
 }
