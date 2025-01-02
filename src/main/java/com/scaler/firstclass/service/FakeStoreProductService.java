@@ -8,7 +8,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@Service
+
+
+@Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
     // Inside this, fake store is going to be third party service
@@ -24,9 +26,10 @@ public class FakeStoreProductService implements ProductService{
                 restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
                         FakeStoreProductDto.class);
 
-        //System.out.println(fakeStoreProductDto.toString());
+//        System.out.println(fakeStoreProductDto.toString());
+
         if(fakeStoreProductDto == null) {
-            throw new ProductNotFoundException("Product not found with id"+ id);
+            throw new ProductNotFoundException("Product not found with id "+id);
         }
         return fakeStoreProductDto.getProduct();
     }
@@ -44,20 +47,19 @@ public class FakeStoreProductService implements ProductService{
         fakeStoreProductDto.setCategory(category);
         fakeStoreProductDto.setDescription(description);
 
-        FakeStoreProductDto responsd = restTemplate.postForObject(
+        FakeStoreProductDto response = restTemplate.postForObject(
                 "https://fakestoreapi.com/products",
                 fakeStoreProductDto,
                 FakeStoreProductDto.class);
-
-        return responsd.getProduct();
+        return response.getProduct();
     }
 
 }
 
 
+//////////////////////////////////////////////////////////////
 
-
-
+//@Service
 //public class FakeStoreProductService implements ProductService{
 //
 //    // Inside this, fake store is going to be third party service
@@ -73,10 +75,9 @@ public class FakeStoreProductService implements ProductService{
 //                restTemplate.getForObject("https://fakestoreapi.com/products/" + id,
 //                        FakeStoreProductDto.class);
 //
-////        System.out.println(fakeStoreProductDto.toString());
-//
+//        //System.out.println(fakeStoreProductDto.toString());
 //        if(fakeStoreProductDto == null) {
-//            throw new ProductNotFoundException("Product not found with id "+id);
+//            throw new ProductNotFoundException("Product not found with id"+ id);
 //        }
 //        return fakeStoreProductDto.getProduct();
 //    }
@@ -94,12 +95,15 @@ public class FakeStoreProductService implements ProductService{
 //        fakeStoreProductDto.setCategory(category);
 //        fakeStoreProductDto.setDescription(description);
 //
-//        FakeStoreProductDto response = restTemplate.postForObject(
+//        FakeStoreProductDto responsd = restTemplate.postForObject(
 //                "https://fakestoreapi.com/products",
 //                fakeStoreProductDto,
 //                FakeStoreProductDto.class);
 //
-//        return response.getProduct();
+//        return responsd.getProduct();
 //    }
 //
 //}
+
+
+

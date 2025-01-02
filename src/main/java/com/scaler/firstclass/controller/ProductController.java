@@ -4,12 +4,15 @@ import com.scaler.firstclass.dtos.ErrorDto;
 import com.scaler.firstclass.exceptions.ProductNotFoundException;
 import com.scaler.firstclass.modules.Product;
 import com.scaler.firstclass.service.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 public class ProductController {
+
     // CRUD apis around product
     // For the product
     // 1. to create a product
@@ -19,7 +22,7 @@ public class ProductController {
 
     private ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(@Qualifier("selfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -30,6 +33,7 @@ public class ProductController {
         Product p = productService.createProduct(product.getId(),
                 product.getTitle(), product.getDescription(),
                 product.getPrice(), product.getCategory().getTitle());
+
         return p;
     }
 
@@ -40,7 +44,9 @@ public class ProductController {
         Product p = productService.getSingleProduct(id);
         System.out.println("Ending the api here");
 
-        ResponseEntity<Product> response = new ResponseEntity<>(p, HttpStatus.OK);
+        ResponseEntity<Product> response = new ResponseEntity<>(
+                p, HttpStatus.OK
+        );
 
         return response;
     }
@@ -53,13 +59,15 @@ public class ProductController {
 
     }
 
-
     @ExceptionHandler(ProductNotFoundException.class)
-    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e){
+    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e) {
         ErrorDto errorDto = new ErrorDto();
         errorDto.setMessage(e.getMessage());
 
-        ResponseEntity<ErrorDto> response = new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
+
+        ResponseEntity<ErrorDto> response = new ResponseEntity<>(
+                errorDto, HttpStatus.NOT_FOUND
+        );
         return response;
     }
 }
@@ -69,10 +77,10 @@ public class ProductController {
 
 
 
-//
-//
+////////////////////////////////////////////////////////////////
+
+//@RestController
 //public class ProductController {
-//
 //    // CRUD apis around product
 //    // For the product
 //    // 1. to create a product
@@ -103,9 +111,7 @@ public class ProductController {
 //        Product p = productService.getSingleProduct(id);
 //        System.out.println("Ending the api here");
 //
-//        ResponseEntity<Product> response = new ResponseEntity<>(
-//                p, HttpStatus.OK
-//        );
+//        ResponseEntity<Product> response = new ResponseEntity<>(p, HttpStatus.OK);
 //
 //        return response;
 //    }
@@ -118,15 +124,16 @@ public class ProductController {
 //
 //    }
 //
+//
 //    @ExceptionHandler(ProductNotFoundException.class)
-//    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e) {
+//    public ResponseEntity<ErrorDto> handleProductNotFoundException(Exception e){
 //        ErrorDto errorDto = new ErrorDto();
 //        errorDto.setMessage(e.getMessage());
 //
-//
-//        ResponseEntity<ErrorDto> response = new ResponseEntity<>(
-//                errorDto, HttpStatus.NOT_FOUND
-//        );
+//        ResponseEntity<ErrorDto> response = new ResponseEntity<>(errorDto, HttpStatus.NOT_FOUND);
 //        return response;
 //    }
 //}
+
+
+

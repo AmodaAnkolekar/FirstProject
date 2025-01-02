@@ -14,7 +14,12 @@ public class FirstclassApplication {
 //        p.setId(12L);
 //        System.out.println(p);
 
-
+        /////////////////////////////////////////////////
+//        Product p = new Product();
+//        p.setId(12L);
+//        System.out.println(p);
+//        ProductService productService = new SelfProductService();
+//        ProductController pc = new ProductController(productService);
 }
 
 
